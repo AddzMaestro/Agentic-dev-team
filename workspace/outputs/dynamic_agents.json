@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "created": "2025-08-12",
+    "version": "1.0.0",
+    "description": "Registry of dynamically created agents"
+  },
+  "agents": {
+    "dynamic_cache_optimization_1181": {
+      "spec": {
+        "agent_id": "dynamic_cache_optimization_1181",
+        "purpose": "optimize caching for API responses",
+        "expertise": "cache_optimization (performance optimization)",
+        "model": "claude-3-5-sonnet-20241022",
+        "created": "2025-08-12T04:04:23.133995",
+        "expires": "2025-08-13T04:04:23.134024",
+        "template_type": "optimizer",
+        "responsibilities": [
+          "Identify performance bottlenecks",
+          "Implement optimization strategies",
+          "Measure improvements",
+          "Ensure no regression"
+        ],
+        "files_allowed": [
+          "./workspace/**",
+          "./workspace/outputs/dynamic_cache_optimization_1181/**"
+        ],
+        "success_criteria": [
+          "Complete assigned task successfully",
+          "All tests pass",
+          "No regression in existing functionality",
+          "Clear documentation of changes"
+        ],
+        "context_policy": {
+          "receive_only_curated": true,
+          "max_context_files": 10
+        }
+      },
+      "file_path": "/Users/addzmaestro/coding projects/Claude system/.claude/agents/dynamic_cache_optimization_1181.md",
+      "status": "active"
+    }
+  },
+  "total_created": 1,
+  "active_count": 1,
+  "retired_count": 0
+}

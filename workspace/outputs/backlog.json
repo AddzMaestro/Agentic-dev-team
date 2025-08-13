@@ -1,0 +1,500 @@
+{
+  "metadata": {
+    "project": "ClinicLite No-Show Prediction & Smart Scheduling",
+    "version": "1.0",
+    "created_date": "2025-08-12",
+    "total_story_points": 68,
+    "estimated_sprints": 4,
+    "sprint_velocity": 17
+  },
+  "mvp_phases": {
+    "phase_1": {
+      "name": "Core Prediction & Quick Reschedule",
+      "goal": "Implement essential no-show prediction and two-way SMS reschedule capabilities",
+      "story_points": 37,
+      "estimated_duration": "2 sprints",
+      "success_criteria": [
+        "Risk scores visible for all appointments",
+        "Two-way SMS reschedule working",
+        "15% no-show reduction demonstrated"
+      ]
+    },
+    "phase_2": {
+      "name": "Smart Scheduling & Waitlist",
+      "goal": "Add intelligent overbooking and comprehensive waitlist management",
+      "story_points": 31,
+      "estimated_duration": "2 sprints",
+      "success_criteria": [
+        "Optimal overbooking recommendations active",
+        "65% slot recovery rate achieved",
+        "Staff adoption >80%"
+      ]
+    }
+  },
+  "epics": [
+    {
+      "id": "EPIC-1",
+      "name": "No-Show Risk Prediction",
+      "priority": "P0",
+      "phase": "phase_1",
+      "story_points": 21,
+      "description": "Implement predictive analytics to identify high-risk appointments and provide actionable insights",
+      "stories": [
+        {
+          "id": "STORY-1.1",
+          "title": "Risk Score Calculation",
+          "priority": "P0",
+          "story_points": 8,
+          "sprint": 1,
+          "dependencies": ["patient_history_data", "distance_calculation"],
+          "acceptance_criteria": [
+            "Risk percentage (0-100%) displayed next to patient names",
+            "Color-coded risk levels (Green: 0-29%, Yellow: 30-59%, Red: 60-100%)",
+            "Calculation considers distance, history, age, day of week, transport",
+            "New patients show 35% baseline risk",
+            "Works offline with cached scores"
+          ],
+          "test_scenarios": [
+            "Display risk scores for all appointment types",
+            "Color coding accessibility compliance",
+            "Offline functionality validation",
+            "New patient baseline risk handling"
+          ],
+          "technical_requirements": [
+            "Logistic regression model for risk calculation",
+            "Feature weights: distance (22%), history (28%), day (15%), age (12%)",
+            "Real-time score updates",
+            "Local caching for offline mode"
+          ]
+        },
+        {
+          "id": "STORY-1.2",
+          "title": "Pattern Dashboard",
+          "priority": "P1",
+          "story_points": 13,
+          "sprint": 2,
+          "dependencies": ["historical_data", "analytics_engine", "STORY-1.1"],
+          "acceptance_criteria": [
+            "Weekly no-show rate trend visualization",
+            "Day-of-week pattern showing Monday=38%, Friday=35%",
+            "Monthly overview with seasonal patterns",
+            "Top 5 high-risk demographics",
+            "Actionable insights generation",
+            "Dashboard loads in <3 seconds"
+          ],
+          "test_scenarios": [
+            "Chart rendering with sample data",
+            "Mobile responsive design",
+            "Data export functionality",
+            "Insufficient data handling (<50 appointments)"
+          ],
+          "technical_requirements": [
+            "Chart.js or D3.js for visualizations",
+            "Responsive design framework",
+            "CSV export capability",
+            "Data aggregation queries"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "EPIC-2",
+      "name": "Smart Overbooking",
+      "priority": "P1",
+      "phase": "phase_2",
+      "story_points": 13,
+      "description": "Intelligent capacity management with automated overbooking recommendations",
+      "stories": [
+        {
+          "id": "STORY-2.1",
+          "title": "Automatic Overbooking Recommendations",
+          "priority": "P1",
+          "story_points": 8,
+          "sprint": 3,
+          "dependencies": ["historical_no_show_data", "clinic_capacity_config", "STORY-1.1"],
+          "acceptance_criteria": [
+            "Monday/Friday: 118% capacity recommendations",
+            "Tuesday-Thursday: 105-110% capacity",
+            "Rainy season: +5% additional",
+            "Never recommend >125% overbooking",
+            "Override capability with justification logging"
+          ],
+          "test_scenarios": [
+            "Recommendation calculation accuracy",
+            "Safety constraint validation",
+            "Override mechanism testing",
+            "Historical accuracy tracking"
+          ],
+          "technical_requirements": [
+            "Dynamic recommendation engine",
+            "Constraint validation logic",
+            "Audit logging system",
+            "Real-time capacity monitoring"
+          ]
+        },
+        {
+          "id": "STORY-2.2",
+          "title": "Capacity Management Interface",
+          "priority": "P1",
+          "story_points": 5,
+          "sprint": 3,
+          "dependencies": ["real_time_schedule", "risk_calculation", "STORY-2.1"],
+          "acceptance_criteria": [
+            "Visual capacity meter display",
+            "Color-coded status indicators",
+            "Expected attendance based on risk scores",
+            "Real-time adjustment controls",
+            "High-risk appointment highlighting"
+          ],
+          "test_scenarios": [
+            "Visual indicator functionality",
+            "Real-time updates testing",
+            "Adjustment recommendation accuracy",
+            "Emergency appointment handling"
+          ],
+          "technical_requirements": [
+            "Real-time UI updates",
+            "Progressive web app features",
+            "Intuitive visual design",
+            "Responsive interface"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "EPIC-3",
+      "name": "SMS Quick Reschedule",
+      "priority": "P0",
+      "phase": "phase_1",
+      "story_points": 16,
+      "description": "Two-way SMS communication for quick appointment rescheduling",
+      "stories": [
+        {
+          "id": "STORY-3.1",
+          "title": "Two-Way SMS Reschedule",
+          "priority": "P0",
+          "story_points": 13,
+          "sprint": 1,
+          "dependencies": ["sms_gateway", "slot_availability_engine"],
+          "acceptance_criteria": [
+            "Reply options: 1=tomorrow, 2=next week, 3=next available, CALL=speak with clinic",
+            "Confirmation within 5 minutes",
+            "English and Setswana language support",
+            "Invalid response error handling",
+            "Multiple simultaneous request handling"
+          ],
+          "test_scenarios": [
+            "Two-way SMS workflow testing",
+            "Language preference validation",
+            "Error handling verification",
+            "Concurrent request management"
+          ],
+          "technical_requirements": [
+            "SMS webhook endpoints",
+            "Slot availability algorithms",
+            "Bilingual message templates",
+            "Conflict resolution logic"
+          ]
+        },
+        {
+          "id": "STORY-3.2",
+          "title": "Reminder Optimization",
+          "priority": "P0",
+          "story_points": 3,
+          "sprint": 1,
+          "dependencies": ["patient_contact_db", "sms_gateway", "weather_api"],
+          "acceptance_criteria": [
+            "48-hour advance reminder",
+            "Morning-of reminder 2 hours before",
+            "Weather-aware messaging",
+            "Transport time estimates",
+            "15% no-show reduction target"
+          ],
+          "test_scenarios": [
+            "Timing optimization testing",
+            "Message content validation",
+            "Delivery tracking verification",
+            "Fallback method testing"
+          ],
+          "technical_requirements": [
+            "Scheduling system integration",
+            "Weather API integration",
+            "Message template engine",
+            "Delivery tracking system"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "EPIC-4",
+      "name": "Waitlist Management",
+      "priority": "P1",
+      "phase": "phase_2",
+      "story_points": 18,
+      "description": "Automated priority-based waitlist management for optimal slot utilization",
+      "stories": [
+        {
+          "id": "STORY-4.1",
+          "title": "Priority Queue System",
+          "priority": "P1",
+          "story_points": 10,
+          "sprint": 4,
+          "dependencies": ["patient_prioritization", "sms_gateway", "slot_management"],
+          "acceptance_criteria": [
+            "Priority rules: 1=Urgent, 2=<5km distance, 3=Chronic care, 4=FIFO",
+            "SMS to top 3 candidates simultaneously",
+            "Automatic booking of first confirmed response",
+            "Configurable priority rules",
+            "Manual override capability"
+          ],
+          "test_scenarios": [
+            "Priority rule application",
+            "Simultaneous response handling",
+            "Configuration flexibility testing",
+            "Manual override validation"
+          ],
+          "technical_requirements": [
+            "Priority queue algorithms",
+            "Concurrent SMS processing",
+            "Configuration management",
+            "Audit trail system"
+          ]
+        },
+        {
+          "id": "STORY-4.2",
+          "title": "Slot Recovery System",
+          "priority": "P1",
+          "story_points": 8,
+          "sprint": 4,
+          "dependencies": ["waitlist_system", "metrics_tracking", "notification_system"],
+          "acceptance_criteria": [
+            "65% slot recovery rate target",
+            "<2 hours average fill time",
+            "Tiered recovery process (0-15min, 15-60min, 1-2hr, 2hr+)",
+            "Comprehensive metrics tracking",
+            "Automated escalation process"
+          ],
+          "test_scenarios": [
+            "Recovery rate validation",
+            "Time-to-fill measurement",
+            "Escalation process testing",
+            "Metrics accuracy verification"
+          ],
+          "technical_requirements": [
+            "Recovery algorithm implementation",
+            "Metrics collection system",
+            "Automated escalation logic",
+            "Performance monitoring"
+          ]
+        }
+      ]
+    }
+  ],
+  "cross_cutting_stories": [
+    {
+      "id": "STORY-X.1",
+      "title": "Offline-First Architecture",
+      "priority": "P0",
+      "story_points": 8,
+      "sprint": 2,
+      "dependencies": ["offline_storage", "sync_engine"],
+      "acceptance_criteria": [
+        "Core functionality without internet",
+        "Cached risk scores and recommendations",
+        "Offline waitlist management",
+        "Reliable sync process",
+        "Conflict resolution"
+      ]
+    },
+    {
+      "id": "STORY-X.2",
+      "title": "Integration with Existing ClinicLite",
+      "priority": "P0",
+      "story_points": 5,
+      "sprint": 1,
+      "dependencies": ["existing_cliniclite", "data_migration"],
+      "acceptance_criteria": [
+        "Zero disruption to existing workflows",
+        "Enhanced CSV upload triggers",
+        "Gradual feature rollout",
+        "Data migration validation"
+      ]
+    }
+  ],
+  "sprint_plan": {
+    "sprint_1": {
+      "goal": "Foundation - Risk Calculation & SMS Reschedule",
+      "duration": "2 weeks",
+      "story_points": 19,
+      "stories": ["STORY-1.1", "STORY-3.1", "STORY-3.2", "STORY-X.2"],
+      "deliverables": [
+        "Risk scores visible on appointment lists",
+        "Two-way SMS reschedule working",
+        "Integration with existing ClinicLite complete"
+      ],
+      "risks": [
+        "SMS gateway integration complexity",
+        "Risk calculation accuracy validation"
+      ]
+    },
+    "sprint_2": {
+      "goal": "Analytics & Offline Support",
+      "duration": "2 weeks", 
+      "story_points": 21,
+      "stories": ["STORY-1.2", "STORY-X.1"],
+      "deliverables": [
+        "Pattern dashboard with analytics",
+        "Offline-first architecture implemented"
+      ],
+      "risks": [
+        "Chart rendering performance",
+        "Offline sync complexity"
+      ]
+    },
+    "sprint_3": {
+      "goal": "Smart Overbooking",
+      "duration": "2 weeks",
+      "story_points": 13,
+      "stories": ["STORY-2.1", "STORY-2.2"],
+      "deliverables": [
+        "Overbooking recommendations active",
+        "Capacity management interface complete"
+      ],
+      "risks": [
+        "Overbooking algorithm accuracy",
+        "Staff adoption resistance"
+      ]
+    },
+    "sprint_4": {
+      "goal": "Waitlist Management",
+      "duration": "2 weeks",
+      "story_points": 18,
+      "stories": ["STORY-4.1", "STORY-4.2"],
+      "deliverables": [
+        "Priority waitlist system operational",
+        "65% slot recovery rate achieved"
+      ],
+      "risks": [
+        "Priority rule complexity",
+        "Recovery rate targets"
+      ]
+    }
+  },
+  "dependencies": {
+    "external": [
+      {
+        "name": "SMS Gateway Integration",
+        "provider": "Africa's Talking or Orange Botswana",
+        "requirements": ["Two-way SMS", "Delivery receipts", "Unicode support"],
+        "risk_level": "Medium"
+      },
+      {
+        "name": "Weather API",
+        "provider": "Botswana Meteorological Services",
+        "requirements": ["Daily forecasts", "Rainfall data"],
+        "risk_level": "Low"
+      }
+    ],
+    "internal": [
+      {
+        "name": "Patient Distance Calculation",
+        "requirements": ["GPS coordinates", "Clinic locations"],
+        "risk_level": "Medium"
+      },
+      {
+        "name": "Historical Appointment Data",
+        "requirements": ["3+ months of data", "No-show patterns"],
+        "risk_level": "Low"
+      }
+    ]
+  },
+  "success_metrics": {
+    "primary": {
+      "no_show_reduction": {
+        "target": "15%",
+        "measurement": "Monthly comparison vs baseline",
+        "critical_threshold": "10%"
+      },
+      "sms_response_rate": {
+        "target": ">40%",
+        "measurement": "Reschedule requests/total reminders",
+        "critical_threshold": "30%"
+      },
+      "slot_recovery_rate": {
+        "target": ">65%",
+        "measurement": "Cancelled slots filled/total cancellations",
+        "critical_threshold": "50%"
+      },
+      "prediction_accuracy": {
+        "target": ">70%",
+        "measurement": "High-risk identification accuracy",
+        "critical_threshold": "60%"
+      },
+      "user_adoption": {
+        "target": "80%",
+        "measurement": "Staff actively using risk scores",
+        "critical_threshold": "70%"
+      }
+    },
+    "secondary": {
+      "patient_satisfaction": {
+        "target": "<20 minutes average wait",
+        "measurement": "Patient feedback surveys"
+      },
+      "staff_efficiency": {
+        "target": "25% reduction in overtime",
+        "measurement": "Monthly timesheet analysis"
+      },
+      "revenue_recovery": {
+        "target": "BWP 8,000-12,000 monthly",
+        "measurement": "Slot utilization x service fees"
+      }
+    }
+  },
+  "risk_mitigation": [
+    {
+      "risk": "SMS delivery reliability",
+      "probability": "Medium",
+      "impact": "High",
+      "mitigation": "Multi-provider fallback, delivery tracking"
+    },
+    {
+      "risk": "Staff resistance to new features",
+      "probability": "Medium", 
+      "impact": "High",
+      "mitigation": "Gradual rollout, comprehensive training"
+    },
+    {
+      "risk": "Prediction accuracy below targets",
+      "probability": "Low",
+      "impact": "Medium",
+      "mitigation": "Baseline rule-based fallback, continuous model refinement"
+    },
+    {
+      "risk": "Integration complexity with existing system",
+      "probability": "Medium",
+      "impact": "Medium",
+      "mitigation": "Thorough testing, parallel deployment option"
+    }
+  ],
+  "technical_debt": [
+    {
+      "item": "Offline sync conflict resolution",
+      "priority": "High",
+      "sprint": 2,
+      "effort": "3 story points"
+    },
+    {
+      "item": "SMS rate limiting and queuing",
+      "priority": "Medium",
+      "sprint": 3,
+      "effort": "2 story points"
+    },
+    {
+      "item": "Comprehensive error logging",
+      "priority": "Medium",
+      "sprint": 4,
+      "effort": "2 story points"
+    }
+  ]
+}

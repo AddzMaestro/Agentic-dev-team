@@ -1,0 +1,32 @@
+{
+  "DataEngineer": {
+    "read_access": [
+      "/Users/addzmaestro/coding projects/Claude system/workspace/backend/models.py",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/backend/main.py",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/backend/database.py",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/data/cliniclite.db",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/outputs/task_graph.json",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/backend/requirements.txt"
+    ],
+    "write_access": [
+      "/Users/addzmaestro/coding projects/Claude system/workspace/backend/vaccine_models.py",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/backend/vaccine_pipeline.py",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/backend/vaccine_etl.py",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/backend/vaccine_monitoring.py",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/backend/vaccine_analytics.py",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/backend/vaccine_validation.py",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/data/vaccine_test_data.py",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/data/cliniclite.db",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/logs/vaccine_pipeline.log",
+      "/Users/addzmaestro/coding projects/Claude system/workspace/reports/vaccine_implementation.md"
+    ],
+    "constraints": [
+      "Must maintain backward compatibility with existing tables",
+      "Cannot modify existing table structures, only add new ones",
+      "Must use SQLAlchemy for all database operations",
+      "Must follow existing code patterns and conventions",
+      "Must implement comprehensive error handling",
+      "Must generate realistic test data"
+    ]
+  }
+}

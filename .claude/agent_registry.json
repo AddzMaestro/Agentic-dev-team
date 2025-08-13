@@ -1,0 +1,189 @@
+{
+  "agents": {
+    "TechLead": {
+      "emoji": "\ud83d\udd35",
+      "color": "\u001b[34m",
+      "model": "claude-3-opus-20240229",
+      "priority": 1,
+      "can_invoke": [
+        "all"
+      ],
+      "parallel": false,
+      "description": "Primary orchestrator and user interface"
+    },
+    "Researcher": {
+      "emoji": "\ud83d\udfe3",
+      "color": "\u001b[35m",
+      "model": "claude-3-opus-20240229",
+      "priority": 2,
+      "can_invoke": [],
+      "parallel": true,
+      "description": "Domain investigation and IDK management"
+    },
+    "Architect": {
+      "emoji": "\ud83d\udfe2",
+      "color": "\u001b[32m",
+      "model": "claude-3-opus-20240229",
+      "priority": 3,
+      "can_invoke": [
+        "DataEngineer",
+        "BackendEngineer",
+        "FrontendEngineer"
+      ],
+      "parallel": true,
+      "description": "System design and TYPE definitions"
+    },
+    "ProductOwner": {
+      "emoji": "\ud83d\udfe0",
+      "color": "\u001b[33m",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 4,
+      "can_invoke": [
+        "QA"
+      ],
+      "parallel": true,
+      "description": "User stories and requirements"
+    },
+    "DataEngineer": {
+      "emoji": "\ud83e\uddf1",
+      "color": "\u001b[31m",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 5,
+      "can_invoke": [
+        "DataScientist"
+      ],
+      "parallel": true,
+      "description": "Data pipelines and ETL"
+    },
+    "DataScientist": {
+      "emoji": "\ud83d\udd2c",
+      "color": "\u001b[36m",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 6,
+      "can_invoke": [],
+      "parallel": true,
+      "description": "Analytics and predictions"
+    },
+    "BackendEngineer": {
+      "emoji": "\ud83d\udd34",
+      "color": "\u001b[91m",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 7,
+      "can_invoke": [],
+      "parallel": true,
+      "description": "API and server implementation"
+    },
+    "FrontendEngineer": {
+      "emoji": "\ud83d\udfe1",
+      "color": "\u001b[93m",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 8,
+      "can_invoke": [],
+      "parallel": true,
+      "description": "UI and dashboard"
+    },
+    "QA": {
+      "emoji": "\ud83d\udfe4",
+      "color": "\u001b[33m",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 9,
+      "can_invoke": [
+        "SelfHealing"
+      ],
+      "parallel": false,
+      "description": "Playwright testing"
+    },
+    "SelfHealing": {
+      "emoji": "\u26ab",
+      "color": "\u001b[90m",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 10,
+      "can_invoke": [
+        "QA"
+      ],
+      "parallel": false,
+      "description": "Automatic fix generation"
+    },
+    "DeliveryLead": {
+      "emoji": "\ud83d\udfe9",
+      "color": "\u001b[92m",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 11,
+      "can_invoke": [
+        "all"
+      ],
+      "parallel": false,
+      "description": "Release management"
+    }
+  },
+  "invocation_map": {
+    "@TechLead": {
+      "agent": "TechLead",
+      "emoji": "\ud83d\udd35",
+      "model": "claude-3-opus-20240229"
+    },
+    "@Researcher": {
+      "agent": "Researcher",
+      "emoji": "\ud83d\udfe3",
+      "model": "claude-3-opus-20240229"
+    },
+    "@Architect": {
+      "agent": "Architect",
+      "emoji": "\ud83d\udfe2",
+      "model": "claude-3-opus-20240229"
+    },
+    "@ProductOwner": {
+      "agent": "ProductOwner",
+      "emoji": "\ud83d\udfe0",
+      "model": "claude-3-5-sonnet-20241022"
+    },
+    "@DataEngineer": {
+      "agent": "DataEngineer",
+      "emoji": "\ud83e\uddf1",
+      "model": "claude-3-5-sonnet-20241022"
+    },
+    "@DataScientist": {
+      "agent": "DataScientist",
+      "emoji": "\ud83d\udd2c",
+      "model": "claude-3-5-sonnet-20241022"
+    },
+    "@BackendEngineer": {
+      "agent": "BackendEngineer",
+      "emoji": "\ud83d\udd34",
+      "model": "claude-3-5-sonnet-20241022"
+    },
+    "@FrontendEngineer": {
+      "agent": "FrontendEngineer",
+      "emoji": "\ud83d\udfe1",
+      "model": "claude-3-5-sonnet-20241022"
+    },
+    "@QA": {
+      "agent": "QA",
+      "emoji": "\ud83d\udfe4",
+      "model": "claude-3-5-sonnet-20241022"
+    },
+    "@SelfHealing": {
+      "agent": "SelfHealing",
+      "emoji": "\u26ab",
+      "model": "claude-3-5-sonnet-20241022"
+    },
+    "@DeliveryLead": {
+      "agent": "DeliveryLead",
+      "emoji": "\ud83d\udfe9",
+      "model": "claude-3-5-sonnet-20241022"
+    }
+  },
+  "execution_order": [
+    "TechLead",
+    "Researcher",
+    "Architect",
+    "ProductOwner",
+    "DataEngineer",
+    "DataScientist",
+    "BackendEngineer",
+    "FrontendEngineer",
+    "QA",
+    "SelfHealing",
+    "DeliveryLead"
+  ]
+}

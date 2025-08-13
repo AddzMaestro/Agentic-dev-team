@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  orchestrator:
+    build: .
+    container_name: zero-error-orchestrator
+    env_file:
+      - .env
+    volumes:
+      - ./workspace:/app/workspace
+      - ./inputs:/app/inputs
+      - ./specs:/app/specs
+      - ./tests:/app/tests
+    networks:
+      - app-network
+    command: python orchestrator.py --mode autonomous
+    restart: unless-stopped
+
+  app:
+    # Placeholder for the actual application being tested
+    # This would be replaced with the specific application
+    image: nginx:alpine
+    container_name: test-app
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+    volumes:
+      - ./workspace/frontend:/usr/share/nginx/html:ro
+
+  redis:
+    # Optional Redis for production message queue
+    image: redis:7-alpine
+    container_name: zero-error-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+    profiles:
+      - production
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  workspace:
+    driver: local

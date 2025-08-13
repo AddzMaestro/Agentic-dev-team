@@ -1,0 +1,188 @@
+{
+  "feature": "Vaccine Inventory Tracking System",
+  "description": "Comprehensive vaccine cold chain management with temperature monitoring, expiry tracking, and automated alerts for primary clinics in Botswana",
+  "value_proposition": {
+    "primary_benefits": [
+      "Prevent vaccine wastage due to temperature excursions",
+      "Automated expiry date monitoring and alerts",
+      "Real-time cold chain breach notifications",
+      "Batch tracking for recall management",
+      "Integration with national immunization programs"
+    ],
+    "impact_metrics": [
+      "Reduce vaccine wastage by 40%",
+      "100% cold chain compliance tracking",
+      "Zero expired vaccine administration",
+      "15-minute response time to temperature breaches"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "T001",
+      "agent": "DataEngineer",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 1,
+      "goal": "Design and implement vaccine inventory database schema",
+      "dependencies": [],
+      "deliverables": [
+        "vaccine_inventory table with batch tracking",
+        "temperature_logs table for cold chain monitoring",
+        "vaccine_types reference table with storage requirements",
+        "vaccine_movements table for stock transactions",
+        "temperature_alerts table for breach tracking"
+      ],
+      "success_criteria": [
+        "All tables created with proper relationships",
+        "Indexes optimized for query performance",
+        "Constraints enforce data integrity",
+        "Support for offline data synchronization"
+      ],
+      "estimated_time": "45 minutes"
+    },
+    {
+      "id": "T002",
+      "agent": "DataEngineer",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 2,
+      "goal": "Create ETL pipeline for vaccine data ingestion",
+      "dependencies": ["T001"],
+      "deliverables": [
+        "CSV import for vaccine batches",
+        "Temperature sensor data ingestion",
+        "Batch validation and error handling",
+        "Data quality checks and cleansing",
+        "Automated data refresh scheduling"
+      ],
+      "success_criteria": [
+        "Process 10,000 records in under 5 seconds",
+        "99.9% data accuracy validation",
+        "Graceful handling of malformed data",
+        "Audit trail for all data changes"
+      ],
+      "estimated_time": "60 minutes"
+    },
+    {
+      "id": "T003",
+      "agent": "DataEngineer",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 3,
+      "goal": "Implement cold chain monitoring pipeline",
+      "dependencies": ["T001"],
+      "deliverables": [
+        "Real-time temperature data processing",
+        "Moving average calculation for stability",
+        "Breach detection algorithm",
+        "Alert generation logic",
+        "Temperature trend analysis"
+      ],
+      "success_criteria": [
+        "Detect breaches within 1 minute",
+        "Zero false positive alerts",
+        "Historical trend visualization ready",
+        "Support for multiple sensor types"
+      ],
+      "estimated_time": "90 minutes"
+    },
+    {
+      "id": "T004",
+      "agent": "DataEngineer",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 4,
+      "goal": "Build vaccine expiry and stock management system",
+      "dependencies": ["T001", "T002"],
+      "deliverables": [
+        "Expiry date tracking with FIFO/FEFO logic",
+        "Automated low stock alerts",
+        "Vaccine wastage reporting",
+        "Reorder point calculations",
+        "Coverage rate analytics"
+      ],
+      "success_criteria": [
+        "Alert 30/15/7 days before expiry",
+        "Accurate stock levels across batches",
+        "Wastage reasons properly categorized",
+        "Integration with existing stock_items table"
+      ],
+      "estimated_time": "75 minutes"
+    },
+    {
+      "id": "T005",
+      "agent": "DataEngineer",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 5,
+      "goal": "Create immunization schedule integration",
+      "dependencies": ["T001", "T004"],
+      "deliverables": [
+        "Link vaccines to patient appointments",
+        "Age-based vaccine schedule validation",
+        "Multi-dose tracking for series completion",
+        "Contraindication checking",
+        "Coverage reporting by vaccine type"
+      ],
+      "success_criteria": [
+        "Match WHO immunization schedule",
+        "Track series completion rates",
+        "Flag contraindications automatically",
+        "Generate DHIS2-compatible reports"
+      ],
+      "estimated_time": "60 minutes"
+    },
+    {
+      "id": "T006",
+      "agent": "DataEngineer",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 6,
+      "goal": "Implement data validation and quality assurance",
+      "dependencies": ["T002", "T003", "T004"],
+      "deliverables": [
+        "Batch number validation against manufacturer DB",
+        "Temperature range validation per vaccine type",
+        "Duplicate entry prevention",
+        "Data completeness checks",
+        "Anomaly detection for unusual patterns"
+      ],
+      "success_criteria": [
+        "100% batch number validation",
+        "Catch all temperature anomalies",
+        "Zero duplicate vaccine records",
+        "95% data completeness minimum"
+      ],
+      "estimated_time": "45 minutes"
+    },
+    {
+      "id": "T007",
+      "agent": "DataEngineer",
+      "model": "claude-3-5-sonnet-20241022",
+      "priority": 7,
+      "goal": "Generate test data and validate system",
+      "dependencies": ["T001", "T002", "T003", "T004", "T005", "T006"],
+      "deliverables": [
+        "1000+ vaccine batch records",
+        "10000+ temperature readings",
+        "Simulated breach scenarios",
+        "Edge case test data",
+        "Performance benchmarks"
+      ],
+      "success_criteria": [
+        "Realistic data distribution",
+        "All edge cases covered",
+        "System handles 1M+ records",
+        "Sub-second query response times"
+      ],
+      "estimated_time": "30 minutes"
+    }
+  ],
+  "execution_order": [
+    "T001",
+    ["T002", "T003"],
+    "T004",
+    "T005",
+    "T006",
+    "T007"
+  ],
+  "total_estimated_time": "7 hours",
+  "parallel_opportunities": [
+    "T002 and T003 can run in parallel after T001",
+    "Data validation can be incrementally added during pipeline development"
+  ]
+}

@@ -1,0 +1,91 @@
+# Router Policy for Agent Selection
+# MetaAgent uses these triggers to route tasks to appropriate agents
+
+triggers:
+  # Research and Investigation
+  - when: "(research|unknowns|market|risks|investigate|explore)"
+    route: "Researcher 🟣"
+    priority: 1
+    
+  # Specification and Requirements
+  - when: "(spec|PRIMARY_SPEC.md|types|invariants|protocols|examples)"
+    route: "TechLead 🔵"
+    priority: 2
+    
+  # User Stories and Product
+  - when: "(gherkin|story|acceptance|backlog|feature|requirement)"
+    route: "ProductOwner 🟠"
+    priority: 3
+    
+  # Architecture and Design
+  - when: "(architecture|diagram|contract|nfr|system design|scalability)"
+    route: "Architect 🟢"
+    priority: 4
+    
+  # Data Processing
+  - when: "(ingest|etl|dq|lineage|pipeline|csv|data processing)"
+    route: "DataEngineer 🧱"
+    priority: 5
+    
+  # Analytics and ML
+  - when: "(feature|metric|baseline|evaluation|model|prediction|analytics)"
+    route: "DataScientist 🔬"
+    priority: 6
+    
+  # Backend Development
+  - when: "(api|endpoint|service|backend|server|database|auth)"
+    route: "BackendEngineer 🔴"
+    priority: 7
+    
+  # Frontend Development
+  - when: "(ui|aria|selector|frontend|button|form|dashboard|react)"
+    route: "FrontendEngineer 🟡"
+    priority: 8
+    
+  # Testing
+  - when: "(playwright|e2e|test|assert|validation|coverage)"
+    route: "QA 🟤"
+    priority: 9
+    
+  # Fix Generation
+  - when: "(fail|flake|patch|fix|repair|heal)"
+    route: "SelfHealing ⚫"
+    priority: 10
+    
+  # Delivery and Release
+  - when: "(status|risk|report|release|deploy|delivery)"
+    route: "DeliveryLead 🟩"
+    priority: 11
+
+# Default routing when no triggers match
+defaults:
+  first: "Researcher 🟣"  # Start with research if unclear
+  last: "DeliveryLead 🟩"  # End with delivery report
+  fallback: "TechLead 🔵"  # When completely uncertain
+
+# Dynamic agent patterns
+dynamic_patterns:
+  - pattern: "dynamic_*"
+    model_default: "claude-3-5-sonnet-20241022"
+    max_lifetime_hours: 24
+    auto_retire: true
+
+# Parallel execution rules
+parallel_rules:
+  - agents: ["ProductOwner 🟠", "Architect 🟢"]
+    can_parallel: true
+  - agents: ["DataEngineer 🧱", "BackendEngineer 🔴", "FrontendEngineer 🟡"]
+    can_parallel: true
+  - agents: ["QA 🟤", "SelfHealing ⚫"]
+    can_parallel: false  # Must be sequential
+
+# Context curation rules
+context_rules:
+  minimal: true  # Always provide minimal context
+  max_files_per_agent: 10
+  exclude_patterns:
+    - "*.pyc"
+    - "__pycache__"
+    - ".git"
+    - "node_modules"
+    - ".env"
