@@ -18,6 +18,57 @@ This isn't just another AI coding assistant. It's a **fully autonomous system** 
 3. **Creates new agents on-demand** - MetaAgent spawns specialists as needed
 4. **Minimal human intervention** 
 
+## 📋 Prerequisites
+
+**CRITICAL**: The autonomous system relies heavily on Playwright for testing. Without proper installation, the system cannot achieve zero-error delivery.
+
+### System Requirements
+- **Python 3.8+** (Required for orchestrator)
+- **Node.js 14+** (Required for Playwright)
+- **Git** (Required for version control)
+
+### Playwright & Chromium Installation
+
+**Method 1: Automated (Recommended)**
+The `quick_setup.sh` script handles everything automatically:
+```bash
+git clone https://github.com/AddzMaestro/Agentic-dev-team.git
+cd Agentic-dev-team
+./quick_setup.sh  # Installs Playwright 1.38.0 + Chromium automatically
+```
+
+**Method 2: Manual Installation**
+If you prefer manual control:
+
+```bash
+# Install Python dependencies first
+pip install playwright==1.38.0
+
+# Install Chromium browser (REQUIRED for testing)
+playwright install chromium
+
+# Alternative: Install with system dependencies (Linux/CI environments)
+playwright install chromium --with-deps
+```
+
+**Method 3: Node.js Installation**
+For Node.js projects or if Python installation fails:
+```bash
+npm install -g playwright@1.38.0
+npx playwright install chromium
+```
+
+### Version Compatibility Note
+- **Playwright 1.38.0** is specifically used for **macOS 10.15 compatibility**
+- **Chromium** is the primary browser for all autonomous testing
+- **Other browsers** (Firefox, Safari) are not required for this system
+
+### Verification
+Test your Playwright installation:
+```bash
+python -c "import playwright; print('✅ Playwright installed')"
+playwright --version  # Should show: Version 1.38.0
+```
 
 ## ⚡ Quick Start (2 Minutes)
 
@@ -519,9 +570,6 @@ Projects successfully built autonomously:
 - [ ] Kubernetes deployment automation
 - [ ] Real-time collaboration between human and agents
 
-## 📄 License
-
-MIT License - Use freely, attribution appreciated
 
 ## 🙏 Acknowledgments
 
