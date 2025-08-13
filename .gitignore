@@ -257,8 +257,8 @@ site/
 !workspace/events/.gitkeep
 !workspace/broadcasts/.gitkeep
 
-# Spec files (keep template, ignore generated)
-specs/PRIMARY_SPEC.md
+# Spec files (keep template, include PRIMARY_SPEC)
+# specs/PRIMARY_SPEC.md
 
 # Local development
 *.local
