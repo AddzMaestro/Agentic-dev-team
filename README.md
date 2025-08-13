@@ -548,11 +548,6 @@ We welcome contributions that enhance the autonomous capabilities!
 - [Creating Custom Agents](docs/custom_agents.md) - Build your own specialists
 - [API Documentation](workspace/outputs/api_spec.yaml) - Generated API specs
 
-## 🎓 Learning Resources
-
-- **Tutorial**: [Building Your First Autonomous Project](docs/tutorial.md)
-- **Video**: [Watch the System in Action](https://youtube.com/...)
-- **Blog**: [How We Achieved Zero-Error Delivery](https://medium.com/...)
 
 ## 📊 Success Stories
 
