@@ -23,8 +23,8 @@ This isn't just another AI coding assistant. It's a **fully autonomous system** 
 
 ```bash
 # 1. Clone and setup
-git clone <repository>
-cd autonomous-agent-system
+git clone https://github.com/AddzMaestro/Agentic-dev-team.git
+cd Agentic-dev-team
 ./quick_setup.sh
 
 # 2. Add your API key
@@ -354,7 +354,7 @@ The system will autonomously:
 ## 📁 Project Structure
 
 ```
-autonomous-agent-system/
+Agentic-dev-team/
 ├── 🎯 inputs/              # Problem statements
 │   └── problem.md          # Your project requirements
 ├── 🤖 agents/              # Agent configurations

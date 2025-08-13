@@ -11,6 +11,12 @@ This is a **fully autonomous development system** that will:
 
 ## ⚡ 2-Minute Setup
 
+### Step 0: Clone the Repository
+```bash
+git clone https://github.com/AddzMaestro/Agentic-dev-team.git
+cd Agentic-dev-team
+```
+
 ### Step 1: Run the Setup Script
 ```bash
 ./quick_setup.sh
